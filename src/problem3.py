@@ -3,8 +3,8 @@ PRACTICE Exam 1, problem 3.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Valerie Galluzzi, Mark Hays, Amanda Stouder, Aaron Wilkin,
-         their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues, and Yifei XIoa.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -103,7 +103,18 @@ def run_test_problem3a():
     # Below this comment (or integrated with one of the above tests,
     # your choice), add 1 more test case of your own choosing.
     # -------------------------------------------------------------------------
+    #window 4:
+    title='problem 3a test 5: start at (50,60),30 lines'
+    window4=rg.RoseWindow(600,500,title)
 
+    #Test 5:
+    point=rg.Point(50,60)
+    expected=348
+    answer=problem3a(window4,point,30)
+    print()
+    print('Test 5 expected:',expected)
+    print('       actual:  ',answer)
+    window4.close_on_mouse_click()
 
 def problem3a(window, point, n):
     """
@@ -146,7 +157,21 @@ def problem3a(window, point, n):
     #    DIFFICULTY:      7 or 8
     #    TIME ESTIMATE:   20 to 35 minutes.
     # -------------------------------------------------------------------------
+    dis=1
+    sum=0
+    for k in range(n):
+        L = rg.Line(rg.Point(point.x + k * 20, point.y + k * 10), rg.Point(point.x + k * 20, point.y + k * 10 + 50))
+        L.thickness = dis
+        L.attach_to(window)
+        sum = sum + dis
+        if dis<=13-2:
+            dis = dis+ 2
+        else:
+            dis=13
 
+
+    window.render()
+    return sum
 
 def run_test_problem3b():
     """ Tests the   problem3b   function. """
@@ -215,7 +240,14 @@ def problem3b(m, point1):
     #    DIFFICULTY:      8 or 9
     #    TIME ESTIMATE:   20 to 30 minutes.
     # -------------------------------------------------------------------------
+    window=rg.RoseWindow(400,650)
+    window.render()
+    sum=0
+    for j in range (m):
+        sum=sum+problem3a(window,rg.Point(point1.x,point1.y+60*j),3+j*2)
 
+    window.close_on_mouse_click()
+    return sum
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
